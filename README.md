@@ -2,6 +2,9 @@
 
 ## This script will install Fedora Linux with the Cinnamon Desktop and the following software (LibreOffice, Chrome, Visual studio code) in a bootable root ZFS pool. 
 
+#### A huge shout out needs to go to the fine folks over at the OpenZFS project were the instructions and alot of these code snippets originated from [Openzfs.org](https://openzfs.org/wiki/Main_Page)
+
+
 #### Data Loss Warning !!!
 
 #### Potential Data loss Warning: This script will delete any existing partition structure on a physical or virtual disks and create a new partitions in its place. If you are dual booting another operating in your system from another physical/virtual drive and wish to retain it. It is Highly recommended that you first remove the other Operating System Hard Drive/SSD/NVME from your system first before executing this script. Other wise this script will assume you wish to create a mirror and Will!! partition the other drives! Accordingly Please make sure your important data is backed-up to an external storage device (such as a CD, DVD, or external USB hard drive) before attempting to run this procedure on your system.
@@ -15,6 +18,7 @@
     	- Fedora Spins (Xfce, i3, …)
 	- USB Stick or USb Drive (I went with a USB drive as it faster)
 	- A VM you can pass through a USB Device to VMware, VirtualBox, KVM, HyperV should all work (I used KVM)
+	- a minumum of 25GB of Hard Drive space do to the way the ZFS Datasets are layed out.
 
 ### Before you can install Fedora with a ZFS root pool it will first necessary to build a bootable USB Stick / disk that the script can be run from to perform the OS installation from.
 
