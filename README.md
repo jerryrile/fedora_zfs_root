@@ -1,8 +1,10 @@
 # Installing Fedora with a ZFS root from Live USB
 
-### Data Loss Warning !!!
+## This script will install Fedora Linux with the Cinnamon Desktop and the following software (LibreOffice, Chrome, Visual studio code) in a bootable root ZFS pool. 
 
-### Potential Data loss Warning: This script will delete any existing partition structure on a physical or virtual disks and create a new partitions in its place. If you are dual booting another operating in your system from another physical/virtual drive and wish to retain it. It is Highly recommended that you first remove the other Operating System Hard Drive/SSD/NVME from your system first before executing this script. Other wise this script will assume you wish to create a mirror and Will!! partition the other drives! Accordingly Please make sure your important data is backed-up to an external storage device (such as a CD, DVD, or external USB hard drive) before attempting to run this procedure on your system.
+#### Data Loss Warning !!!
+
+#### Potential Data loss Warning: This script will delete any existing partition structure on a physical or virtual disks and create a new partitions in its place. If you are dual booting another operating in your system from another physical/virtual drive and wish to retain it. It is Highly recommended that you first remove the other Operating System Hard Drive/SSD/NVME from your system first before executing this script. Other wise this script will assume you wish to create a mirror and Will!! partition the other drives! Accordingly Please make sure your important data is backed-up to an external storage device (such as a CD, DVD, or external USB hard drive) before attempting to run this procedure on your system.
 
 
 ### USB Image Build
@@ -123,7 +125,7 @@ Permissive
 
 - Note: SELinux will be enabled on the installed system.
 
-#### Intrestingly Fedora 36 now ships with ZFS-Fuse install by default but disabled. We will not be using it for the installation as the ZFS verion it's based on does not support all the perameters we require.
+#### Intrestingly Fedora 36 now ships with ZFS-Fuse installed by default but disabled. We will not be using it for the installation as the ZFS version it's based on does not support all the perameters we require.
 
 - 7: remove zfs-fuse ( this will remove fair amount of packages including Boxes and Libvirt which is not required )
 ~~~
@@ -156,7 +158,7 @@ dnf install -y arch-install-scripts gdisk dosfstools git
 ~~~
 
 ~~~
-git clone 
+git clone https://github.com/jerryrile/fedora_zfs_root.git
 ~~~
 
 - 13: Change into the fedora_zfs_root directory and excute the fefora_install_zfs_root script to begin the installation.
@@ -171,9 +173,12 @@ total 68
 -rwxr-xr-x. 1 root root  6389 May 19 00:32 stage2_chroot.sh
 ~~~
 
+- 14: execute the fedora_install_zfs_root script
 ~~~
 [root@localhost-live fedora_zfs_root]# ./fedora_install_zfs_root.sh
 ~~~
+
+- 15: Enter in the hostname and your user name.
 ~~~
 [root@fedora fedora_zfs_root]# ./fedora_install_zfs_root.sh 
 Enter the hostname :luna4
@@ -181,16 +186,22 @@ Enter the hostname :luna4
 [root@fedora fedora_zfs_root]# ./fedora_install_zfs_root.sh 
 Enter the hostname :luna4
 Please entering your username: user
+~~~
 
+- 16: Selecte 1 if you wish to encrypt the root poot or 2 if you do not wish to use encryption. Note if you do choose to enable encrytion your password must be 8 character or longer or the installation will fail.
+~~~
 ===========================================
 || Do you wish to Encrypt the root pool! ||
 ===========================================
 1) Yes
 2) No
 #? 1
+~~~
 
-./fedora_install_zfs_root.sh: line 50: Enter: command not found
+##### The script at this point will partition you disk/s and install the base system packages as well as zfs. Once completed the system will enter a Chroot environment to complete the installation.
 
+- 17: Select 1 if you are using UEFI and 2 if you are using a regular BIOS
+~~~ 
 ================================================
 || Does this system use an UEFI or Legacy BIOS||
 ================================================
@@ -201,27 +212,47 @@ Please entering your username: user
 =========================================================
 || If using legacy booting, install GRUB to every disk ||
 =========================================================
+~~~
 
-
+- 18: Enter your root password when prompted.
+~~~
 ===============================
 || Setting the root password ||
 ===============================
 Changing password for user root.
 New password: 
 Retype new password: 
+~~~
 
+- 19: Enter in the password for the UserID you chose at the begining of this script.
+~~~
 ===================================
 || Setting User Account Password ||
 ===================================
 Changing password for user user.
 New password: 
 Retype new password:
-
-===============================
-|| Setting the root password ||
-===============================
-Changing password for user root.
-New password: 
-Retype new password: 
-passwd: all authentication tokens updated successfully.
 ~~~
+
+- 20:  On first boot the system will boot to the emergency shell. It does this because it is unable to do an initial mount on the ZFS root pool.  To work around this issue execute the following command to import zfs pool, this should only be required once 
+
+~~~
+zpool import -f rpool
+~~~
+
+- 21: type in the command exit to to leave the emergency shell and continue the boot sequence. The system at this point will autorelable the filesystem and reboot.
+
+~~~
+exit
+~~~
+
+##### Post installation
+
+- 22: you'll note that when the system boots the grub menu might have a reference to the bookable USB device that you used to build the system with. To get rid of this menu entire execute the following commands as root to rebuild the grub boot menu. Once completed you should be good to go, Cheers
+
+~~~
+cp /boot/efi/EFI/fedora/grub.cfg /boot/efi/EFI/fedora/grub2/grub.cfg
+cp /boot/efi/EFI/fedora/grub.cfg /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+~~~
+
