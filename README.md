@@ -174,7 +174,7 @@ total 68
 ~~~
 [root@localhost-live fedora_zfs_root]# ./fedora_install_zfs_root.sh
 ~~~
-
+~~~
 [root@fedora fedora_zfs_root]# ./fedora_install_zfs_root.sh 
 Enter the hostname :luna4
 
@@ -224,4 +224,4 @@ Changing password for user root.
 New password: 
 Retype new password: 
 passwd: all authentication tokens updated successfully.
-awk: cmd. line:1: warning: escape sequence `\=' treated as plain `='
+~~~
