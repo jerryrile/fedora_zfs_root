@@ -16,6 +16,8 @@
 	- USB Stick or USb Drive (I went with a USB drive as it faster)
 	- A VM you can pass through a USB Device to VMware, VirtualBox, KVM, HyperV should all work (I used KVM)
 
+### Before you can install Fedora with a ZFS root pool it will first necessary to build a bootable USB Stick / disk that the script can be run from to perform the OS installation from.
+
 ### USB Stick / Disk creation
 - create a VM using your prefered hypervisor and attach the Instalation ISO and Passing through the your USB Stick or Drive. 
 - Install Fedora to your USB device as you would normaly to a local disk
