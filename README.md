@@ -2,7 +2,7 @@
 
 ## This script will install Fedora Linux with the Cinnamon Desktop and the following software (LibreOffice, Chrome, Visual studio code) in a bootable root ZFS pool. 
 
-#### A huge shout out needs to go to the fine folks over at the OpenZFS project were the instructions and alot of these code snippets originated from [Openzfs.org](https://openzfs.org/wiki/Main_Page)
+#### First, a huge shout out needs to go to the fine folks over at the OpenZFS project were the instructions and alot of these code snippets originated from [Openzfs.org](https://openzfs.org/wiki/Main_Page)
 
 
 #### Data Loss Warning !!!
