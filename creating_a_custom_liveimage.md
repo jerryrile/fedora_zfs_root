@@ -160,4 +160,4 @@ dnf install -y git arch-install-scripts gdisk dosfstools
 git clone https://github.com/jerryrile/fedora_zfs_root.git
 ~~~
    
-### Congratulations you've just created a custom installation USB stick with ZFS kernel modules loaded, that can be used to install Fedora with a bootable ZFS filesystem. For further installation instructions please see [README.md](https://github.com/jerryrile/fedora_zfs_root/blob/main/README.md)  
+### Congratulations you've just created a custom installation USB stick with ZFS kernel modules loaded, that can be used to install Fedora with a bootable ZFS filesystem. For further installation instructions please see [README.md](https://github.com/jerryrile/fedora_zfs_root/blob/main/README.md)
