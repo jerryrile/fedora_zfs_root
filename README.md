@@ -1,12 +1,14 @@
 # Installing Fedora with a ZFS root from Live USB
 
-#### Have you ever wanted to run Fedora Linux with a Cinnamon Desktop and a bootable ZFS root disk but did not know how or where to begin. Fortunately the OpenZFS team has put together some great documentation on how to do this manually.
+#### Have you ever wanted to run Fedora Linux with a Cinnamon Desktop and a bootable ZFS root disk but did not know how or where to begin. Fortunately the OpenZFS team has put together some great documentation on how to do this. 
 
-#### To help automate the and speed up the installation process I’ve put together two scripts based on their documentation.
+#### To help automate and speed up the installation process I’ve put together two scripts based on their documentation.
 
-#### The first script fedora_install_zfs_root.sh partitions your disks, creates the zfs volumes and installs the Fordora Linux BaseOS packages.
+#### In The first script fedora_install_zfs_root.sh, partitions your disks, creates the ZFS volumes and installs the Fedora Linux BaseOS packages.
 
-#### The second script stage2.sh is call from within a CHROOTED environment, Compiles the kernel modules and finalizes the installation of the system including the installion of the Grub2 bootloader, Desktop Environment and Application such as Firefox, Chrome, LibreOffice, Visualstuido Code and more.
+#### The second script stage2.sh is the called from within a CHROOTED environment, Compiles the kernel modules and finalizes the installation of the system including the installation of the Grub2 bootloader, Desktop Environment and Application such as Firefox, Chrome, LibreOffice, Visualstuido Code and more.
+
+#### Before proceeding: Please review the documentation on [Creating a Custom Live image](https://github.com/jerryrile/fedora_zfs_root/blob/main/creating_a_custom_liveimage.md). This custom Live image will be used to install the system. 
 
 #### fedora_install_zfs_root.sh: 
 - Prompts you to chose a Hostname and User ID
@@ -39,8 +41,8 @@
 #### stage2.sh
 - Once the system has completed installing the BaseOS it will then instantiate a CHROOT environment and copy the stage2.sh script to it and launch the script.
 - The stage2 script will continue the installation process by Compiling the OpenZFS kernel module and loading it in to the initramfs
-- Installin grub2 to the boot disk and BPOOL ZFS volume. 
-- Installing any remaining package groups. Such as the Desktop Environment and Applications sets such as Firefox, Chrome, LibreOffice, and Visualstuido Code.
+- Installing grub2 to the boot disk and BPOOL ZFS volume. 
+- Installing any remaining package groups. Such as the Desktop Environment and applications sets such as Firefox, Chrome, LibreOffice, and Visualstuido Code.
 - Once completed the system will exit the CHROOT environment and shutdown the system. At this point the installation medium can be removed and you can boot into your newly created bootable ZFS root Fedora Linux system.
 
 #### PLEASE NOTE !!!
