@@ -17,7 +17,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-INST_FEDORA_VER='36'
+INST_FEDORA_VER='38'
 INST_ID=sys
 INST_VDEV=
 #----Partitioning---------
